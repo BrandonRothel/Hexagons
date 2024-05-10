@@ -19,7 +19,7 @@ window.fill((255, 255, 255))
 side = 100
 apothem = math.sqrt(3) * side / 2
 vertex = []
-
+lines = []
 
 def random_color():
     r = rd.randint(0, 255)
@@ -96,24 +96,54 @@ def drawHexagon(locX, locY):
     #print(point6)
     #print("\n")
     
-    pygame.draw.line(window, color, 
+    thisLine = [point6, point1]
+    if thisLine not in lines:
+        lines.append(thisLine)
+        pygame.draw.line(window, color, 
                      [point6[0], point6[1]], 
                      [point1[0], point1[1]], thickness)
-    pygame.draw.line(window, color, 
+        pygame.display.update()
+        sleep(.1)
+    thisLine = [point1, point2]
+    if thisLine not in lines:
+        lines.append(thisLine)
+        pygame.draw.line(window, color, 
                      [point1[0], point1[1]], 
                      [point2[0], point2[1]], thickness)
-    pygame.draw.line(window, color, 
+        pygame.display.update()
+        sleep(.1)
+    thisLine = [point2, point3]
+    if thisLine not in lines:
+        lines.append(thisLine)
+        pygame.draw.line(window, color, 
                      [point2[0], point2[1]], 
                      [point3[0], point3[1]], thickness)
-    pygame.draw.line(window, color, 
+        pygame.display.update()
+        sleep(.1)
+    thisLine = [point3, point4]
+    if thisLine not in lines:
+        lines.append(thisLine)
+        pygame.draw.line(window, color, 
                      [point3[0], point3[1]], 
                      [point4[0], point4[1]], thickness)
-    pygame.draw.line(window, color, 
+        pygame.display.update()
+        sleep(.1)
+    thisLine = [point4, point5]
+    if thisLine not in lines:
+        lines.append(thisLine)
+        pygame.draw.line(window, color, 
                      [point4[0], point4[1]], 
                      [point5[0], point5[1]], thickness)
-    pygame.draw.line(window, color, 
+        pygame.display.update()
+        sleep(.1)
+    thisLine = [point5, point6]
+    if thisLine not in lines:
+        lines.append(thisLine)
+        pygame.draw.line(window, color,  
                      [point5[0], point5[1]], 
                      [point6[0], point6[1]], thickness)
+        pygame.display.update()
+        sleep(.1)
 
     for point, elem in enumerate(currentVertexes):
         #interPoints = []
