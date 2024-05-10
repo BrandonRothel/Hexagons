@@ -20,6 +20,12 @@ side = 100
 apothem = math.sqrt(3) * side / 2
 vertex = []
 lines = []
+leds = []
+
+class Led:
+    def __init__(self, coord, color):
+        self.coord = coord
+        self.color = color
 
 def random_color():
     r = rd.randint(0, 255)
@@ -28,6 +34,8 @@ def random_color():
     return (r, g, b)
 
 def interpolate_points(x1, y1, x2, y2, num_points):
+    
+
     """
     Interpolates between two points (x1, y1) and (x2, y2) to generate `num_points` intermediate points.
     
@@ -58,27 +66,27 @@ def drawHexagon(locX, locY):
     apothem = math.sqrt(3) * side / 2
     currentVertexes = []
 
-    point1 = [locX+(side/2), locY+apothem]
+    point1 = [round(locX+(side/2)), round(locY+apothem)]
     if point1 not in currentVertexes:
         vertex.append(point1)
         currentVertexes.append(point1)
-    point2 = [locX+(side), locY]
+    point2 = [round(locX+(side)), round(locY)]
     if point2 not in currentVertexes:
         vertex.append(point2)
         currentVertexes.append(point2)
-    point3 = [locX+(side/2), locY-apothem]
+    point3 = [round(locX+(side/2)), round(locY-apothem)]
     if point3 not in currentVertexes:
         vertex.append(point3)
         currentVertexes.append(point3)
-    point4 = [locX-(side/2), locY-apothem]
+    point4 = [round(locX-(side/2)), round(locY-apothem)]
     if point4 not in currentVertexes:
         vertex.append(point4)
         currentVertexes.append(point4)
-    point5 = [locX-(side), locY]
+    point5 = [round(locX-(side)), round(locY)]
     if point5 not in currentVertexes:
         vertex.append(point5)
         currentVertexes.append(point5)
-    point6 = [locX-(side/2), locY+apothem]
+    point6 = [round(locX-(side/2)), round(locY+apothem)]
     if point6 not in currentVertexes:
         vertex.append(point6)
         currentVertexes.append(point6)
@@ -98,64 +106,64 @@ def drawHexagon(locX, locY):
     
     thisLine = [point6, point1]
     if thisLine not in lines:
-        lines.append(thisLine)
-        pygame.draw.line(window, color, 
-                     [point6[0], point6[1]], 
-                     [point1[0], point1[1]], thickness)
-        pygame.display.update()
-        sleep(.1)
-    thisLine = [point1, point2]
-    if thisLine not in lines:
-        lines.append(thisLine)
-        pygame.draw.line(window, color, 
-                     [point1[0], point1[1]], 
-                     [point2[0], point2[1]], thickness)
-        pygame.display.update()
-        sleep(.1)
-    thisLine = [point2, point3]
-    if thisLine not in lines:
-        lines.append(thisLine)
-        pygame.draw.line(window, color, 
-                     [point2[0], point2[1]], 
-                     [point3[0], point3[1]], thickness)
-        pygame.display.update()
-        sleep(.1)
-    thisLine = [point3, point4]
-    if thisLine not in lines:
-        lines.append(thisLine)
-        pygame.draw.line(window, color, 
-                     [point3[0], point3[1]], 
-                     [point4[0], point4[1]], thickness)
-        pygame.display.update()
-        sleep(.1)
-    thisLine = [point4, point5]
-    if thisLine not in lines:
-        lines.append(thisLine)
-        pygame.draw.line(window, color, 
-                     [point4[0], point4[1]], 
-                     [point5[0], point5[1]], thickness)
-        pygame.display.update()
-        sleep(.1)
-    thisLine = [point5, point6]
-    if thisLine not in lines:
-        lines.append(thisLine)
-        pygame.draw.line(window, color,  
-                     [point5[0], point5[1]], 
-                     [point6[0], point6[1]], thickness)
-        pygame.display.update()
-        sleep(.1)
-
-    for point, elem in enumerate(currentVertexes):
-        #interPoints = []
-        interPoints = interpolate_points(elem[0], elem[1], currentVertexes[(point+1) % len(currentVertexes)][0], currentVertexes[(point+1) % len(currentVertexes)][1], 5)
-        for interPoint in interPoints:
-            color = random_color()
-            pygame.draw.circle(window, color, interPoint, 10)
+        thisLineReversed = [thisLine[1], thisLine[0]]
+        if thisLineReversed not in lines:
+            lines.append(thisLine)
+            pygame.draw.line(window, color, 
+                         [point6[0], point6[1]], 
+                         [point1[0], point1[1]], thickness)
             pygame.display.update()
             sleep(.1)
-
-    pygame.display.update()
-    sleep(1)
+    thisLine = [point1, point2]
+    if thisLine not in lines:
+        thisLineReversed = [thisLine[1], thisLine[0]]
+        if thisLineReversed not in lines:
+            lines.append(thisLine)
+            pygame.draw.line(window, color, 
+                         [point1[0], point1[1]], 
+                         [point2[0], point2[1]], thickness)
+            pygame.display.update()
+            sleep(.1)
+    thisLine = [point2, point3]
+    if thisLine not in lines:
+        thisLineReversed = [thisLine[1], thisLine[0]]
+        if thisLineReversed not in lines:
+            lines.append(thisLine)
+            pygame.draw.line(window, color, 
+                         [point2[0], point2[1]], 
+                         [point3[0], point3[1]], thickness)
+            pygame.display.update()
+            sleep(.1)
+    thisLine = [point3, point4]
+    if thisLine not in lines:
+        thisLineReversed = [thisLine[1], thisLine[0]]
+        if thisLineReversed not in lines:
+            lines.append(thisLine)
+            pygame.draw.line(window, color, 
+                         [point3[0], point3[1]], 
+                         [point4[0], point4[1]], thickness)
+            pygame.display.update()
+            sleep(.1)
+    thisLine = [point4, point5]
+    if thisLine not in lines:
+        thisLineReversed = [thisLine[1], thisLine[0]]
+        if thisLineReversed not in lines:
+            lines.append(thisLine)
+            pygame.draw.line(window, color, 
+                         [point4[0], point4[1]], 
+                         [point5[0], point5[1]], thickness)
+            pygame.display.update()
+            sleep(.1)
+    thisLine = [point5, point6]
+    if thisLine not in lines:
+        thisLineReversed = [thisLine[1], thisLine[0]]
+        if thisLineReversed not in lines:
+            lines.append(thisLine)
+            pygame.draw.line(window, color,  
+                         [point5[0], point5[1]], 
+                         [point6[0], point6[1]], thickness)
+            pygame.display.update()
+            sleep(.1)
 
 def nextCenter(centerPoint, direction):
     match direction:
@@ -178,28 +186,43 @@ def nextCenter(centerPoint, direction):
             newCenter = [centerPoint[0],centerPoint[1]-apothem*2]
             return newCenter
 
+def updateLeds(theseLeds):
+    for thisled in theseLeds:
+        thisled.color = (128,128,0)
+        pygame.draw.circle(window, thisled.color, thisled.coord, 10)
+        pygame.display.update()
 
 running = True
+done = False
 while running:
     for event in pygame.event.get():
-        centerPoint = [200, 300]
-        drawHexagon(centerPoint[0],centerPoint[1])
-        centerPoint = nextCenter(centerPoint, "1")
-        drawHexagon(centerPoint[0],centerPoint[1])
-        centerPoint = nextCenter(centerPoint, "2")
-        drawHexagon(centerPoint[0],centerPoint[1])
-        centerPoint = nextCenter(centerPoint, "1")
-        drawHexagon(centerPoint[0],centerPoint[1])
-        centerPoint = nextCenter(centerPoint, "3")
-        drawHexagon(centerPoint[0],centerPoint[1])
+        if done != True:
+            centerPoint = [200, 300]
+            drawHexagon(centerPoint[0],centerPoint[1])
+            centerPoint = nextCenter(centerPoint, "1")
+            drawHexagon(centerPoint[0],centerPoint[1])
+            centerPoint = nextCenter(centerPoint, "2")
+            drawHexagon(centerPoint[0],centerPoint[1])
+            centerPoint = nextCenter(centerPoint, "1")
+            drawHexagon(centerPoint[0],centerPoint[1])
+            centerPoint = nextCenter(centerPoint, "3")
+            drawHexagon(centerPoint[0],centerPoint[1])
+
+            for point, elem in enumerate(lines):
+                #interPoints = []
+                interPoints = interpolate_points(elem[0][0], elem[0][1], elem[1][0], elem[1][1], 5)
+                for interPoint in interPoints:
+                    color = random_color()
+                    leds.append(Led(interPoint, color))
+                    pygame.draw.circle(window, leds[-1].color, leds[-1].coord, 10)
+                    pygame.display.update()
+                    sleep(.1)
+            done = True
+        if done == True:
+            updateLeds(leds)
         if event.type == pygame.QUIT:
             running = False
         print(vertex)
-        for points in vertex:
-            color = random_color()
-            pygame.draw.circle(window, color, points, 10)
-            pygame.display.update()
-        sleep(100)
 
 
 
